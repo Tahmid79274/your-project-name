@@ -1,9 +1,9 @@
-import sys
-from asteroid import Asteroid
+# import sys
+# from asteroid import Asteroid
 from constants import SCREEN_WIDTH,SCREEN_HEIGHT,LINE_WIDTH
 from logger import log_state,log_event
 import pygame
-from asteroidfield import AsteroidField
+# from asteroidfield import AsteroidField
 
 from player import Player
 
@@ -16,35 +16,39 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
-    asteroids = pygame.sprite.Group()
+    # asteroids = pygame.sprite.Group()
     Player.containers = (updatable,drawable)
-    Asteroid.containers = (asteroids, updatable, drawable)
-    AsteroidField.containers = updatable
-    asteroid_field = AsteroidField()
+    # Asteroid.containers = (asteroids, updatable, drawable)
+    # AsteroidField.containers = updatable
+    # asteroid_field = AsteroidField()
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     
     while True:
         log_state()
         for event in pygame.event.get():
+            pass
             if event.type == pygame.QUIT:
                 return
         updatable.update(dt)
-        for asteriod in asteroids:
-            if asteriod.collides_with(player):
-                log_event("player_hit")
-                print("Game over!")
-                sys.exit()
-        player.update(dt)
+    #     for asteriod in asteroids:
+    #         if asteriod.collides_with(player):
+    #             log_event("player_hit")
+    #             print("Game over!")
+    #             sys.exit()
+    #     player.update(dt)
         screen.fill("black")
+        player.draw(screen)
+        player.update(dt)
+        for draw in drawable:
+            draw.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60)/1000
         
-        player.draw(screen)
         
-        for draw in drawable:
-            draw.draw(screen)
+        
+        
         # drawable.draw(screen)
-        # print(f"dt: {dt}")bootdev run 658641f2-586b-48eb-bfb0-e7612cdd5dfd
+        print(f"dt: {dt}")
 
 
 if __name__ == "__main__":
