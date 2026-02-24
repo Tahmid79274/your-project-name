@@ -39,15 +39,17 @@ def main():
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
-    #     player.update(dt)
+            for shot in shots:
+                if asteriod.collides_with(shot):
+                    log_event("asteroid_shot")
+                    asteriod.kill()
+                    shot.kill()
         screen.fill("black")
         player.draw(screen)
         player.update(dt)
         for draw in drawable:
             draw.draw(screen)
-        # for asteriod in asteroids:
-        #     for shot in shots:
-        #         if shot.co
+        
         pygame.display.flip()
         dt = clock.tick(60)/1000
         
