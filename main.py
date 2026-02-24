@@ -1,4 +1,4 @@
-# import sys
+import sys
 from asteroid import Asteroid
 from constants import SCREEN_WIDTH,SCREEN_HEIGHT,LINE_WIDTH
 from logger import log_state,log_event
@@ -34,17 +34,20 @@ def main():
             if event.type == pygame.QUIT:
                 return
         updatable.update(dt)
-        # for asteriod in asteroids:
-            # if asteriod.collides_with(player):
-    #             log_event("player_hit")
-    #             print("Game over!")
-    #             sys.exit()
+        for asteriod in asteroids:
+            if asteriod.collides_with(player):
+                log_event("player_hit")
+                print("Game over!")
+                sys.exit()
     #     player.update(dt)
         screen.fill("black")
         player.draw(screen)
         player.update(dt)
         for draw in drawable:
             draw.draw(screen)
+        # for asteriod in asteroids:
+        #     for shot in shots:
+        #         if shot.co
         pygame.display.flip()
         dt = clock.tick(60)/1000
         
